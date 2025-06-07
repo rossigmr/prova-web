@@ -1,32 +1,71 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 3000;
 
-const cors = require('cors');
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Servidor Node com Express funcionando!');
+const usuarios = [
+  {
+    id: 1,
+    nome: 'Ana Silva',
+    email: 'ana.silva@example.com',
+    idade: 28,
+    cidade: 'São Paulo',
+    telefone: '11 99999-0001'
+  },
+  {
+    id: 2,
+    nome: 'Bruno Costa',
+    email: 'bruno.costa@example.com',
+    idade: 35,
+    cidade: 'Rio de Janeiro',
+    telefone: '21 98888-0002'
+  },
+  {
+    id: 3,
+    nome: 'Carla Mendes',
+    email: 'carla.mendes@example.com',
+    idade: 31,
+    cidade: 'Belo Horizonte',
+    telefone: '31 97777-0003'
+  },
+  {
+    id: 4,
+    nome: 'Diego Souza',
+    email: 'diego.souza@example.com',
+    idade: 42,
+    cidade: 'Curitiba',
+    telefone: '41 96666-0004'
+  },
+  {
+    id: 5,
+    nome: 'Eduarda Lima',
+    email: 'eduarda.lima@example.com',
+    idade: 24,
+    cidade: 'Salvador',
+    telefone: '71 95555-0005'
+  }
+];
+
+
+app.get('/usuarios', (req, res) => {
+  const listaResumida = usuarios.map(({ id, nome }) => ({ id, nome }));
+  res.json(listaResumida);
+});
+
+
+app.get('/dados/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const usuario = usuarios.find(u => u.id === id);
+
+  if (!usuario) {
+    return res.status(404).json({ erro: 'Usuário não encontrado' });
+  }
+
+  res.json(usuario);
 });
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
-});
-
-
-const usuarios = [
-  { id: 1, nome: "Ana Silva", email: "ana.silva@example.com" },
-  { id: 2, nome: "Bruno Souza", email: "bruno.souza@example.com" },
-  { id: 3, nome: "Carlos Lima", email: "carlos.lima@example.com" },
-  { id: 4, nome: "Daniela Rocha", email: "daniela.rocha@example.com" },
-  { id: 5, nome: "Eduardo Melo", email: "eduardo.melo@example.com" },
-  { id: 6, nome: "Fernanda Costa", email: "fernanda.costa@example.com" },
-  { id: 7, nome: "Gabriel Alves", email: "gabriel.alves@example.com" },
-  { id: 8, nome: "Helena Martins", email: "helena.martins@example.com" },
-  { id: 9, nome: "Igor Ferreira", email: "igor.ferreira@example.com" },
-  { id: 10, nome: "Juliana Teixeira", email: "juliana.teixeira@example.com" }
-];
-
-app.get('/usuarios', (req, res) => {
-  res.json(usuarios);
 });
