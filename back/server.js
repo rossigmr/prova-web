@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const cors = require('cors');
+app.use(cors());
+
 app.get('/', (req, res) => {
   res.send('Servidor Node com Express funcionando!');
 });
@@ -23,3 +26,7 @@ const usuarios = [
   { id: 9, nome: "Igor Ferreira", email: "igor.ferreira@example.com" },
   { id: 10, nome: "Juliana Teixeira", email: "juliana.teixeira@example.com" }
 ];
+
+app.get('/usuarios', (req, res) => {
+  res.json(usuarios);
+});
