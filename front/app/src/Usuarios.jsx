@@ -19,35 +19,41 @@ function Usuarios() {
   };
 
   return (
-    <Container maxWidth="md" sx={{ marginTop: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        Lista de Usuários
-      </Typography>
+<Container maxWidth="md" sx={{ marginTop: 4, textAlign: 'center' }}>
+  <img
+    src="src/assets/UNIDEP_ENDOSSO_AFYA-01.png"
+    alt="Logo UNIDEP"
+    style={{ maxWidth: '200px', height: 'auto', marginBottom: '16px' }}
+  />
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell><strong>ID</strong></TableCell>
-              <TableCell><strong>Nome</strong></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {usuarios.map((u) => (
-              <TableRow
-                key={u.id}
-                hover
-                sx={{ cursor: 'pointer' }}
-                onClick={() => handleClick(u.id)}
-              >
-                <TableCell>{u.id}</TableCell>
-                <TableCell>{u.nome}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+  <Typography variant="h4" align="center" gutterBottom>
+    Lista de Usuários
+  </Typography>
+
+  <TableContainer component={Paper}>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell><strong>ID</strong></TableCell>
+          <TableCell><strong>Nome</strong></TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {usuarios.map((u) => (
+          <TableRow
+            key={u.id}
+            hover
+            sx={{ cursor: 'pointer' }}
+            onClick={() => handleClick(u.id)}
+          >
+            <TableCell>{u.id}</TableCell>
+            <TableCell>{u.nome}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
+</Container>
   );
 }
 

@@ -1,0 +1,20 @@
+# Usa imagem oficial Node.js
+FROM node:18
+
+# Cria e define diretório da aplicação dentro do container
+WORKDIR /app
+
+# Copia os arquivos de dependências
+COPY package*.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia o restante dos arquivos
+COPY . .
+
+# Expõe a porta que o servidor usará
+EXPOSE 3000
+
+# Comando para iniciar o servidor
+CMD ["node", "server.js"]
